@@ -28,6 +28,7 @@ local function restore_terminal_mode()
     os.execute("stty icanon echo")
 end
 
+-- Function to initialize lurses
 function lurses.init()
     set_non_blocking_mode()
     io.write(CSI .. '?25l') -- Hide cursor
@@ -50,6 +51,7 @@ function lurses.init()
     end
 end
 
+-- Function to close lurses
 function lurses.close()
     restore_terminal_mode()
     io.write(CSI .. '?25h') -- Show cursor
@@ -59,10 +61,12 @@ function lurses.close()
     io.flush()
 end
 
+-- Function to move cursor
 function lurses.move(y, x)
     io.write(CSI .. y .. ';' .. x .. 'H')
 end
 
+-- Function to write text
 function lurses.write(str, y, x, fg, bg)
     for i = 1, #str do
         local cx = x + i - 1
@@ -72,6 +76,7 @@ function lurses.write(str, y, x, fg, bg)
     end
 end
 
+-- Function to get user input
 function lurses.getch()
     local char = io.read(1)
     if char == nil then
@@ -127,6 +132,7 @@ function lurses.getch()
     end
 end
 
+-- Function to clear screen
 function lurses.clear()
     for y = 1, height do
         for x = 1, width do
@@ -139,6 +145,7 @@ function lurses.clear()
     lurses.move(1, 1)
 end
 
+-- Fucntion to erase screen
 function lurses.erase()
     for y = 1, height do
         for x = 1, width do
@@ -149,6 +156,7 @@ function lurses.erase()
     lurses.move(1, 1)
 end
 
+-- Function to refresh screen
 function lurses.refresh()
     if lurses.needs_clear then
         io.write(CSI .. '2J') -- Clear entire screen
@@ -166,6 +174,7 @@ function lurses.refresh()
     io.flush()
 end
 
+-- Function to create window
 function lurses.create_window(h, w, y, x)
     local win = {
         height = h,
@@ -176,6 +185,7 @@ function lurses.create_window(h, w, y, x)
         cursor_x = 1
     }
 
+    -- Method to write to the window
     function win:write(str, y, x, fg, bg)
         y = y or self.cursor_y
         x = x or self.cursor_x
