@@ -185,18 +185,27 @@ function lurses.create_window(h, w, y, x)
         cursor_x = 1
     }
 
+    -- Function to iterate over UTF-8 characters
+    local function utf8_iter(str)
+        return str:gmatch("[\0-\x7F\xC2-\xF4][\x80-\xBF]*")
+    end
+
     -- Method to write to the window
     function win:write(str, y, x, fg, bg)
         y = y or self.cursor_y
         x = x or self.cursor_x
-        for i = 1, #str do
+        -- draw unicode characters
+
+        local i = 0
+        for char in utf8_iter(str) do
             local cy = self.y + y - 1
-            local cx = self.x + x + i - 2
+            local cx = self.x + x + i
             if cx <= width and cy <= height and cx > 0 and cy > 0 then
-                buffer[cy][cx] = { char = str:sub(i, i), fg = fg or 7, bg = bg or 0 }
+                buffer[cy][cx] = { char = char, fg = fg or 7, bg = bg or 0 }
             end
+            i = i + 1
         end
-        self.cursor_x = x + #str
+        self.cursor_x = x + i
         self.cursor_y = y
     end
 

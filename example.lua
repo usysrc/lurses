@@ -1,4 +1,5 @@
 local lurses = require('lurses')
+local emojis = require('emojis')
 
 lurses.init()
 lurses.clear()
@@ -14,7 +15,7 @@ if ch == "q" then
 end
 
 local x, y = 5, 5
-win:write("@", x, y, lurses.COLOR_GREEN, lurses.COLOR_BLACK)
+win:write(emojis.tiger_face, x, y, lurses.COLOR_GREEN, lurses.COLOR_BLACK)
 while true do
     local ch = lurses.getch()
     if ch == "KEY_LEFT" then x = x - 1 end
@@ -23,7 +24,7 @@ while true do
     if ch == "KEY_UP" then y = y - 1 end
     if ch == "q" then break end
     lurses.clear()
-    win:write("@", y, x, lurses.COLOR_GREEN, lurses.COLOR_BLACK)
+    win:write(emojis.tiger_face, y, x, lurses.COLOR_GREEN, lurses.COLOR_BLACK)
     lurses.refresh()
 end
 
