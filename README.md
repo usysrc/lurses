@@ -64,6 +64,14 @@ lurses.close()
 - `lurses.erase()`: Erase the screen content
 - `lurses.create_window(h, w, y, x)`: Create a new window
 
+## Example
+
+An example is included in this repo. To run the example:
+
+```shell
+lua example.lua
+```
+
 ## Notes
 
 - This library uses ANSI escape codes and may not work on all terminals.
