@@ -1,6 +1,6 @@
 # Lurses
 
-Lurses is a lightweight, pure Lua implementation inspired by the curses library. It provides basic terminal manipulation capabilities for creating text-based user interfaces.
+Inspired by the curses library but in 'pure' Lua. It provides basic terminal manipulation capabilities for creating text-based user interfaces.
 
 ## Features
 
